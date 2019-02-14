@@ -42,9 +42,12 @@ wss.on('connection', (ws) => {
     const data = JSON.parse(event.data);
     const id = uuidv4();
     let response = null;
-    let type = data.type;
-    let content = data.content;
-    let imageURL = data.imageURL;
+    const type = data.type;
+    const content = data.content;
+    const imageURL = data.imageURL;
+    const colors = ["#00A7E5", "#9500FF", "#00D4A9", "#003EFF"]
+    const userColor = colors[Math.floor(Math.random() * colors.length)];
+
 
     //create msg or notification object to send back to client
     switch (type) {
@@ -53,6 +56,7 @@ wss.on('connection', (ws) => {
         response = {
           id,
           username,
+          userColor,
           content,
           imageURL,
           type
@@ -72,7 +76,6 @@ wss.on('connection', (ws) => {
     }
 
     //send msg back to all connected clients with an added unique ID
-    console.log(JSON.stringify(response))
     wss.broadcast(JSON.stringify(response))
   }
 
