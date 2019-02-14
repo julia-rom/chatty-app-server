@@ -39,7 +39,6 @@ wss.on('connection', (ws) => {
 
   //call back that handles user messages and logs them
   ws.onmessage = function (event) {
-    console.log("incoming event: ", JSON.parse(event.data));
     const data = JSON.parse(event.data);
     const id = uuidv4();
     let response = null;
@@ -73,6 +72,7 @@ wss.on('connection', (ws) => {
     }
 
     //send msg back to all connected clients with an added unique ID
+    console.log(JSON.stringify(response))
     wss.broadcast(JSON.stringify(response))
   }
 
