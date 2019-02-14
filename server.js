@@ -45,6 +45,7 @@ wss.on('connection', (ws) => {
     let response = null;
     let type = data.type;
     let content = data.content;
+    let imageURL = data.imageURL;
 
     //create msg or notification object to send back to client
     switch (type) {
@@ -54,6 +55,7 @@ wss.on('connection', (ws) => {
           id,
           username,
           content,
+          imageURL,
           type
         }
         break;
