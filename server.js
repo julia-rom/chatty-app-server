@@ -31,6 +31,8 @@ wss.on('connection', (ws) => {
 
   //count how many users are connected and sent to client
   const userCount = wss.clients.size;
+  const colors = ["#00A7E5", "#9500FF", "#00D4A9", "#003EFF"]
+  const userColor = colors[Math.floor(Math.random() * colors.length)];
   const userStatusUpdate = {
     type: "userStatusUpdate",
     content: userCount
@@ -45,9 +47,6 @@ wss.on('connection', (ws) => {
     const type = data.type;
     const content = data.content;
     const imageURL = data.imageURL;
-    const colors = ["#00A7E5", "#9500FF", "#00D4A9", "#003EFF"]
-    const userColor = colors[Math.floor(Math.random() * colors.length)];
-
 
     //create msg or notification object to send back to client
     switch (type) {
